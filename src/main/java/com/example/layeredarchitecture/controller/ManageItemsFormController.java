@@ -1,6 +1,7 @@
 package com.example.layeredarchitecture.controller;
 
 import com.example.layeredarchitecture.dao.CustomerDAOImpl;
+import com.example.layeredarchitecture.dao.ItemDAO;
 import com.example.layeredarchitecture.dao.ItemDAOImpl;
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.CustomerDTO;
@@ -74,7 +75,7 @@ public class ManageItemsFormController {
         tblItems.getItems().clear();
             /*Get all items*/
             try {
-                ItemDAOImpl itemDAO = new ItemDAOImpl();
+                ItemDAO itemDAO = new ItemDAOImpl();
                 ArrayList<ItemDTO> allItem = itemDAO.getAllItem();
                 for (ItemDTO dto : allItem) {
                     tblItems.getItems().add(
@@ -141,7 +142,7 @@ public class ManageItemsFormController {
             if (!existItem(code)) {
                 new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id " + code).show();
             }
-            ItemDAOImpl itemDAO=new ItemDAOImpl();
+            ItemDAO itemDAO=new ItemDAOImpl();
             itemDAO.delete(code);
 
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
@@ -182,7 +183,7 @@ public class ManageItemsFormController {
                     new Alert(Alert.AlertType.ERROR, code + " already exists").show();
                 }
                 //Save Item
-                ItemDAOImpl itemdae = new ItemDAOImpl();
+                ItemDAO itemdae = new ItemDAOImpl();
                 boolean isSaved = itemdae.saveitem(new ItemDTO(code,description,unitPrice,qtyOnHand));
                 if (isSaved) {
                     tblItems.getItems().add(new ItemTM(code,description,unitPrice,qtyOnHand));
@@ -200,7 +201,7 @@ public class ManageItemsFormController {
                     new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id " + code).show();
                 }
                 /*Update Item*/
-                ItemDAOImpl impl = new ItemDAOImpl();
+                ItemDAO impl = new ItemDAOImpl();
                 impl.updateItem(new ItemDTO(code,description,unitPrice,qtyOnHand));
 
                 ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
@@ -220,7 +221,7 @@ public class ManageItemsFormController {
 
 
     private boolean existItem(String code) throws SQLException, ClassNotFoundException {
-        ItemDAOImpl itemDAO =new ItemDAOImpl();
+        ItemDAO itemDAO =new ItemDAOImpl();
         return itemDAO.existItem(code);
 
     }
@@ -228,7 +229,7 @@ public class ManageItemsFormController {
 
     private String generateNewId() {
         try {
-            ItemDAOImpl itemDAO=new ItemDAOImpl();
+            ItemDAO itemDAO=new ItemDAOImpl();
             return itemDAO.generateID();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
