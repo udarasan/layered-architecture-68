@@ -13,5 +13,6 @@ public interface ItemDAO {
     public void delete(String code) throws SQLException, ClassNotFoundException;
     public ArrayList<ItemDTO> getAllItem() throws SQLException, ClassNotFoundException ;
     public String generateID() throws SQLException, ClassNotFoundException;
+    public ItemDTO searchItem(String code) throws SQLException, ClassNotFoundException;
 
 }
