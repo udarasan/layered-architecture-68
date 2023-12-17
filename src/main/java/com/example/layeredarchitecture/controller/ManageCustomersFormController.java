@@ -199,7 +199,8 @@ public class ManageCustomersFormController {
                 new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
             }
             customerDAO.deleteCustomer(id);
-
+            tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
+            tblCustomers.getSelectionModel().clearSelection();
             initUI();
 
         } catch (SQLException e) {
