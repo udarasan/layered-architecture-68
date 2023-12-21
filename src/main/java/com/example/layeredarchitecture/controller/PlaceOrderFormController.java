@@ -188,7 +188,7 @@ public class PlaceOrderFormController {
 
     public String generateNewOrderId() {
         try {
-            return orderDAO.generateOID();
+            return orderDAO.generateID();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new order id").show();
         } catch (ClassNotFoundException e) {
@@ -319,7 +319,7 @@ public class PlaceOrderFormController {
 
             //Check order id already exist or not
 
-            boolean b1 = orderDAO.existOrder(orderId);
+            boolean b1 = orderDAO.exist(orderId);
             /*if order id already exist*/
             if (b1) {
                 return false;
@@ -328,7 +328,7 @@ public class PlaceOrderFormController {
             connection.setAutoCommit(false);
 
             //Save the Order to the order table
-            boolean b2 = orderDAO.saveOrder(new OrderDTO(orderId, orderDate, customerId));
+            boolean b2 = orderDAO.save(new OrderDTO(orderId, orderDate, customerId));
 
             if (!b2) {
                 connection.rollback();
@@ -340,7 +340,7 @@ public class PlaceOrderFormController {
             // add data to the Order Details table
 
             for (OrderDetailDTO detail : orderDetails) {
-                boolean b3 = orderDetailsDAO.saveOrderDetails(detail);
+                boolean b3 = orderDetailsDAO.save(detail);
                 if (!b3) {
                     connection.rollback();
                     connection.setAutoCommit(true);
