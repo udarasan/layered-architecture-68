@@ -3,6 +3,7 @@ package com.example.layeredarchitecture.bo;
 import com.example.layeredarchitecture.dao.custom.*;
 import com.example.layeredarchitecture.dao.custom.impl.*;
 import com.example.layeredarchitecture.db.DBConnection;
+import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.model.ItemDTO;
 import com.example.layeredarchitecture.model.OrderDTO;
 import com.example.layeredarchitecture.model.OrderDetailDTO;
@@ -71,6 +72,16 @@ public class PlaceOrderBOImpl implements PlaceOrderBO{
             connection.commit();
             connection.setAutoCommit(true);
             return true;
+    }
+
+    @Override
+    public CustomerDTO searchCustomer(String id) throws SQLException, ClassNotFoundException {
+        return customerDAO.search(id);
+    }
+
+    @Override
+    public ItemDTO searchItem(String code) throws SQLException, ClassNotFoundException {
+        return itemDAO.search(code);
     }
 
     public ItemDTO findItem(String code) {

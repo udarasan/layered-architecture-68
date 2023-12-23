@@ -104,7 +104,7 @@ public class PlaceOrderFormController {
                             new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + newValue + "").show();
                         }
                         //Search Customer
-                        CustomerDTO customerDTO = customerDAO.search(newValue + "");
+                        CustomerDTO customerDTO = placeOrderBO.searchCustomer(newValue + "");
                         txtCustomerName.setText(customerDTO.getName());
 
                     } catch (SQLException e) {
@@ -132,7 +132,7 @@ public class PlaceOrderFormController {
                     }
 
                     //Search Item
-                    ItemDTO item = itemDAO.search(newItemCode + "");
+                    ItemDTO item = placeOrderBO.searchItem(newItemCode + "");
 
                     txtDescription.setText(item.getDescription());
                     txtUnitPrice.setText(item.getUnitPrice().setScale(2).toString());
