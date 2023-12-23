@@ -1,13 +1,9 @@
 package com.example.layeredarchitecture.controller;
 
-import com.example.layeredarchitecture.bo.PlaceOrderBO;
-import com.example.layeredarchitecture.bo.PlaceOrderBOImpl;
-import com.example.layeredarchitecture.dao.custom.*;
-import com.example.layeredarchitecture.dao.custom.impl.*;
-import com.example.layeredarchitecture.db.DBConnection;
+import com.example.layeredarchitecture.bo.custom.PlaceOrderBO;
+import com.example.layeredarchitecture.bo.custom.impl.PlaceOrderBOImpl;
 import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.model.ItemDTO;
-import com.example.layeredarchitecture.model.OrderDTO;
 import com.example.layeredarchitecture.model.OrderDetailDTO;
 import com.example.layeredarchitecture.view.tdm.OrderDetailTM;
 import com.jfoenix.controls.JFXButton;
@@ -28,7 +24,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
