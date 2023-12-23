@@ -11,6 +11,7 @@ import com.example.layeredarchitecture.model.OrderDetailDTO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceOrderBOImpl implements PlaceOrderBO{
@@ -82,6 +83,31 @@ public class PlaceOrderBOImpl implements PlaceOrderBO{
     @Override
     public ItemDTO searchItem(String code) throws SQLException, ClassNotFoundException {
         return itemDAO.search(code);
+    }
+
+    @Override
+    public boolean existItem(String code) throws SQLException, ClassNotFoundException {
+        return itemDAO.exist(code);
+    }
+
+    @Override
+    public boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
+        return customerDAO.exist(id);
+    }
+
+    @Override
+    public String generateOrderID() throws SQLException, ClassNotFoundException {
+        return orderDAO.generateID();
+    }
+
+    @Override
+    public ArrayList<CustomerDTO> getAllCustomer() throws SQLException, ClassNotFoundException {
+        return customerDAO.getAll();
+    }
+
+    @Override
+    public ArrayList<ItemDTO> getAllItems() throws SQLException, ClassNotFoundException {
+        return itemDAO.getAll();
     }
 
     public ItemDTO findItem(String code) {

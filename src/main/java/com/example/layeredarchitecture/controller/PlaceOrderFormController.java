@@ -177,16 +177,16 @@ public class PlaceOrderFormController {
     }
 
     private boolean existItem(String code) throws SQLException, ClassNotFoundException {
-        return itemDAO.exist(code);
+        return placeOrderBO.existItem(code);
     }
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        return customerDAO.exist(id);
+        return placeOrderBO.existCustomer(id);
     }
 
     public String generateNewOrderId() {
         try {
-            return orderDAO.generateID();
+            return placeOrderBO.generateOrderID();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new order id").show();
         } catch (ClassNotFoundException e) {
@@ -197,7 +197,7 @@ public class PlaceOrderFormController {
 
     private void loadAllCustomerIds() {
         try {
-            ArrayList<CustomerDTO> allCustomers = customerDAO.getAll();
+            ArrayList<CustomerDTO> allCustomers = placeOrderBO.getAllCustomer();
             for (CustomerDTO c : allCustomers) {
                 cmbCustomerId.getItems().add(c.getId());
             }
@@ -212,7 +212,7 @@ public class PlaceOrderFormController {
         try {
             /*Get all items*/
 
-            ArrayList<ItemDTO> allItems = itemDAO.getAll();
+            ArrayList<ItemDTO> allItems = placeOrderBO.getAllItems();
             for (ItemDTO i : allItems) {
                 cmbItemCode.getItems().add(i.getCode());
             }
